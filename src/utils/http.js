@@ -25,10 +25,4 @@ http.interceptors.response.use(res=>{
     }
 })
 
-export default (method,url,data)=>{
-    return http({
-        method,
-        url,
-        data
-    })
-}
+export default http;
