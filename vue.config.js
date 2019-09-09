@@ -3,10 +3,10 @@ module.exports = {
   devServer: {
     proxy: {
       "/app": {
-        target: "https://m.nubia.com",
-        changeOrigin: true,
+        target:"https://m.nubia.com",
+        changeOrigin:true,
         pathRewrite: {
-          "^/app": ""
+          "^/app":""
         }
       }
     }
