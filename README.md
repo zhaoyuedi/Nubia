@@ -1,29 +1,10 @@
-# nubia
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 技术栈
+- vue-router
+- vuex
+- 路由懒加载
+- axios
+- JS组件封装
+- UI组件封装
+- 图片懒加载
+- 数据缓存
+- better-scroll
