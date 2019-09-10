@@ -8,7 +8,7 @@ export const homeApi = () => http({
     }
 })
 
-export const discover =() => http({
+export const searchApi =() => http({
     method:"get",
-    url:"/app/show/page/block"
+    url:"/app/show/search/hot_search"
 })

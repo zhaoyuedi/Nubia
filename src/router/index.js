@@ -5,6 +5,7 @@ import cate from './cate';
 import discover from './discover';
 import cart from './cart';
 import mine from './mine';
+import search from "./search"
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -18,7 +19,8 @@ const router = new VueRouter({
         cate,
         discover,
         cart,
-        mine
+        mine,
+        search
     ]
 })
 

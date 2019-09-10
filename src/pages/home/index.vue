@@ -1,5 +1,6 @@
 <template>
     <div id="nubiaindex">
+
         <!----------- 广告 ----------->
         <div class="downApp">
             <a>
@@ -9,18 +10,25 @@
         </div>
         <!----------- 导航 轮播 ----------->
         <div class="page_index">
-            <div class="search">
+            <div class="search" :class="navBarFixed == true ? 'navBarWrap' :''">
                 <div class="logo">
                 </div>
+                <router-link to="/search">
                 <div class="searchBox">
                     红魔3S
                 </div>
+                </router-link>
                 <a class="searchInfo">
                     <img src='https://shop-soa-static.nubia.com/images/buy_mobile/message.png'>
                 </a>
             </div>
             <div class="carousel">
-                <img src="https://oss.static.nubia.cn/blockimage/156766749567.jpg">
+                <Swiper v-if="carouselData.length > 0">
+                    <Slide v-for="(item,index) in carouselData"
+                           :key="index">
+                        <div><img :src="item.small_image |addUrl " /></div>
+                    </Slide>
+                </Swiper>
             </div>
         </div>
         <!----------- show----------->
@@ -40,7 +48,9 @@
         </div>
         <!----------- 111 ----------->
         <div class="showAll">
-            <div class="show_list" v-for="(item,index) in hotSaleData" :key="index">
+            <div class="show_list"
+                 v-for="(item,index) in hotSaleData"
+                 :key="index">
                 <a><img :src="item.small_image | addUrl"></a>
                 <div class="info">
                     <h4>{{item.title}}</h4>
@@ -48,11 +58,10 @@
                     <p>
                         <em>￥</em>
                         <span class="nowPrice">{{item.block_products.original_price}}</span>
-                        <span class="oldPrice">{{item.block_products.price}}</span>
+                        <span class="oldPrice">{{item.block_products.price==item.block_products.original_price ?"":item.block_products.price}}</span>
                     </p>
                 </div>
             </div>
-
 
         </div>
         <div class="findMorePhone">
@@ -67,8 +76,10 @@
         </a>
         <!--copyList-->
         <div class="siftParts_list">
-            <div class="sp_showParts"  v-for="(item,index) in accessoriesData" :key="index">
-                <a class="sp_showImg"> 
+            <div class="sp_showParts"
+                 v-for="(item,index) in accessoriesData"
+                 :key="index">
+                <a class="sp_showImg">
                     <img :src="item.small_image | addUrl"></a>
                 <h3>{{item.title}}</h3>
                 <p>
@@ -121,43 +132,58 @@
 </template>
 
 <script scoped>
-import {homeApi} from "@api"
+import { homeApi } from "@api";
+import { Swiper, Slide } from "vue-swiper-component";
 export default {
     name: "home",
     data() {
         return {
-            hotSaleData:[],
-            accessoriesData:[],
-            showImgLeft:"",
-            showImgRT:"",
-            showImgRB:"",
-            rxjxImg:"",
-            jxpjImg:""
+            carouselData: [],
+            hotSaleData: [],
+            accessoriesData: [],
+            showImgLeft: "",
+            showImgRT: "",
+            showImgRB: "",
+            rxjxImg: "",
+            jxpjImg: "",
+            navBarFixed:false
         };
     },
-//     async created(){
-//    let data = await movieNowApi();
-//     console.log(data.data.movieList)
-//     this.movieNow = data.data.movieList
-//  },
-    async created(){
-        let data=await homeApi();
+    async created() {
+        let data = await homeApi();
         console.log(data.data);
-        this.showImgLeft=data.data[502][0].small_image;
-        this.showImgRT=data.data[503][0].small_image;
-        this.showImgRB=data.data[504][0].small_image;
-        this.rxjxImg=data.data[507][0].small_image;
-        this.jxpjImg=data.data[508][0].small_image;
-        this.hotSaleData=data.data[506];
-        this.accessoriesData=data.data[505];
-                console.log(data.data[507][0]);
+        this.showImgLeft = data.data[502][0].small_image;
+        this.showImgRT = data.data[503][0].small_image;
+        this.showImgRB = data.data[504][0].small_image;
+        this.rxjxImg = data.data[507][0].small_image;
+        this.jxpjImg = data.data[508][0].small_image;
+        this.hotSaleData = data.data[506];
+        this.carouselData = data.data[501];
+        this.accessoriesData = data.data[505];
+        console.log(data.data[507][0]);
     },
-    components: {}
+    components: {
+        Swiper,
+        Slide
+    },
+    mounted(){
+        window.addEventListener('scroll', this.watchScroll)
+    },
+    methods:{
+         watchScroll () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        //  当滚动超过 50 时，实现吸顶效果
+        if (scrollTop > 54) {
+          this.navBarFixed = true
+        } else {
+          this.navBarFixed = false
+        }
+     }
+    }
 };
 </script>
 
 <style>
-
 /* --------------------------------------------  */
 html {
     font-size: 26.67vw;
@@ -185,8 +211,8 @@ img {
 }
 
 .carousel {
+    width:100%;
     height: 2.6rem;
-    z-index: -1;
 }
 .search {
     width: 100%;
@@ -199,11 +225,12 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index:99;
 }
 .logo {
     width: 0.98rem;
     height: 0.16rem;
-    background: url("https://shop-soa-static.nubia.com/images/logo_white.png")
+    background: url("https://shop-soa-static.nubia.com/images/logo_black.png")
         no-repeat 0 center;
     background-size: cover;
     margin-right: 0.08rem;
@@ -213,7 +240,7 @@ img {
     height: 0.35rem;
     padding-left: 0.4rem;
     color: rgb(115, 115, 115);
-    background: rgb(255, 255, 255)
+    background: rgb(248,248,248) 
         url(https://oss.static.nubia.cn/active/5c73876ac212759.png) no-repeat
         12px center;
     background-size: 20px;
@@ -234,6 +261,12 @@ img {
     width: 0.24rem;
     height: 0.24rem;
 }
+.navBarWrap {
+    position:fixed;
+    top:0;
+    background:#fff;
+    z-index:999;
+  }
 .show_img {
     border-bottom: 0.1rem solid #eeeeee;
     overflow: hidden;
@@ -267,7 +300,7 @@ img {
     display: block;
     height: 2.03rem;
 }
-.showAll{
+.showAll {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -278,7 +311,7 @@ img {
     float: left;
 }
 .show_list a {
-    width: 1.85rem;
+    width: 99%;
     height: 1.85rem;
     display: block;
     background: #f4f3ef;
@@ -299,6 +332,9 @@ img {
     font-size: 0.13rem;
     color: #8e8d8e;
 }
+.info h5 span{
+    color:#8e8d8d !important;
+}
 .info em {
     font-size: 0.12rem;
     color: rgb(239, 65, 35);
@@ -310,12 +346,13 @@ img {
     font-size: 0.16rem;
     margin-right: 0.04px;
     color: rgb(239, 65, 35);
+    margin-right: 0.1rem;
 }
 .oldPrice {
-    text-decoration: line-through;
-    font-size: 0.12rem;
+    /* text-decoration: line-through; */
+    font-size: 0.16rem;
     font-weight: 300;
-    color: #8e8d8d;
+    color:rgb(112, 112, 112);;
 }
 .show_list p {
     height: 0.2rem;

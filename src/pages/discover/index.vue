@@ -10,6 +10,13 @@
             </span>发现
         </div>
         <div class="nav">
+            <!-- <router-link v-for="(item,index) in routerList :key="index""
+                :to="item.path"
+                tag="li",
+            
+            >
+
+            </router-link> -->
             <a>产品热评</a>
             <a>体验店</a>
             <a>新闻中心</a>
@@ -27,6 +34,13 @@
 <script>
 export default {
     name: "Find",
+    data(){
+        return {
+            routerList:[
+                {path:"hotReview",title:"产品热评",}
+            ]
+        }  
+    },
     components: {}
 };
 </script>
