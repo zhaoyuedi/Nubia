@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-view></router-view>
     <section class="bgColor">
       <!-- 头部 -->
       <div class="mineHeader commona">
@@ -12,7 +13,10 @@
           <div class="headImg">
             <div class="headImgBox"></div>
             <div class="headInfoBox">
-              <div class="headInfoTop">登录/注册</div>
+              <router-link 
+                to="/mine/login"
+                tag="div"
+              class="headInfoTop">登录/注册</router-link>
               <div class="headInfoBottom">普通会员</div>
             </div>
           </div>
@@ -49,22 +53,22 @@
           </div>
         </div>
         <ul>
-          <li>
+          <router-link to="/mine/order" tag="li">
             <img src="../../../public/img/order1.png" alt />
             <span>待付款</span>
-          </li>
-          <li>
+          </router-link>
+          <router-link to="/mine/order" tag="li">
             <img src="../../../public/img/order2.png" alt />
             <span>待收货</span>
-          </li>
-          <li>
+          </router-link>
+          <router-link to="/mine/order" tag="li">
             <img src="../../../public/img/order3.png" alt />
             <span>已完成</span>
-          </li>
-          <li>
+          </router-link>
+          <router-link to="/mine/order" tag="li">
             <img src="../../../public/img/order4.png" alt />
-            <span>回收订单1</span>
-          </li>
+            <span>回收订单</span>
+          </router-link>
         </ul>
       </div>
 
