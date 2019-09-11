@@ -1,5 +1,5 @@
 export default {
     path: "/search",
     name: "search",
-    component: () => import("@components/searchPage")
+    component: () => import("@pages/searchPage")
 }

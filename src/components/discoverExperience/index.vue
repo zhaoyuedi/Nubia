@@ -5,17 +5,17 @@
             <p>“体验店”：是努比亚官方授权的零售体验店；“牛厂”：是努比亚官方授权的新零售体验区</p>
         </div>
         <!-- ant -->
-        <div class="city">
-            <input type="text">
-            <input type="text">
+
 
             <!-- 级联 -->
 
-
-
+        <!-- <div class="city">
+            <input type="text">
+            <input type="text">
+        </div> -->
             <!-- 级联 -->
             
-        </div>
+
         <img src="https://static.nubia.cn/images/store/v2/str-high-bg.jpg">
         <!-- ant -->
         <div class="addressList">
@@ -247,7 +247,7 @@ img{
 }
 .city input{
     width:100%;
-    height:0.32rem;
+    height:0.30rem;
     margin-top: 0.1rem;
 }
 

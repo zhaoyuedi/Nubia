@@ -1,26 +1,25 @@
 <template>
     <div>
         <div class="header">
-            <span>
-                <svg class="icon"
-                     style="font-size:5px"
-                     aria-hidden="true">
-                    <use xlink:href="#icon-back"></use>
-                </svg>
-            </span>发现
+            <v-touch @tap="goBack()">
+                <span>
+
+                    <svg class="icon"
+                         style="font-size:5px"
+                         aria-hidden="true">
+                        <use xlink:href="#icon-back"></use>
+                    </svg>
+                </span></v-touch>发现
+
         </div>
         <div class="nav">
-            <!-- <router-link v-for="(item,index) in routerList :key="index""
+            <router-link v-for="(item,index) in routerList" :key="index"
                 :to="item.path"
-                tag="li",
-            
+                tag="li"
             >
+            <a>{{item.title}}</a>
 
-            </router-link> -->
-            <a>产品热评</a>
-            <a>体验店</a>
-            <a>新闻中心</a>
-            <a>视频长廊</a>
+            </router-link>
         </div>
         <!-- find -->
         <div>
@@ -34,14 +33,21 @@
 <script>
 export default {
     name: "Find",
-    data(){
+    data() {
         return {
-            routerList:[
-                {path:"hotReview",title:"产品热评",}
+            routerList: [
+                { path: "hotReview", title: "产品热评" },
+                { path: "experience", title: "体验店" },
+                { path: "newsCenter", title: "新闻中心" },
+                { path: "video", title: "视频长廊" },
             ]
-        }  
+        };
     },
-    components: {}
+    methods: {
+        goBack() {
+            this.$router.push("/");
+        }
+    }
 };
 </script>
 <style scoped>
@@ -67,7 +73,7 @@ export default {
     justify-content: space-around;
     align-items: center;
 }
-.nav a {
+.nav li {
     width: 25%;
     height: 0.4rem;
     display: block;

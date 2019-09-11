@@ -2,21 +2,26 @@
     <div id="nubiaindex">
 
         <!----------- 广告 ----------->
-        <div class="downApp">
+        <div class="downApp"
+             v-if="adFlag">
             <a>
                 <img src="https://oss.static.nubia.cn/upload/153984776469.jpg">
             </a>
-            <span>X</span>
+            <v-touch @tap="closeAd($event)">
+                <span>X</span>
+            </v-touch>
         </div>
         <!----------- 导航 轮播 ----------->
         <div class="page_index">
-            <div class="search" :class="navBarFixed == true ? 'navBarWrap' :''">
+
+            <div class="search"
+                 :class="navBarFixed == true ? 'navBarWrap' :''">
                 <div class="logo">
                 </div>
                 <router-link to="/search">
-                <div class="searchBox">
-                    红魔3S
-                </div>
+                    <div class="searchBox">
+                        红魔3S
+                    </div>
                 </router-link>
                 <a class="searchInfo">
                     <img src='https://shop-soa-static.nubia.com/images/buy_mobile/message.png'>
@@ -26,41 +31,60 @@
                 <Swiper v-if="carouselData.length > 0">
                     <Slide v-for="(item,index) in carouselData"
                            :key="index">
-                        <div><img :src="item.small_image |addUrl " /></div>
+                        <router-link tag="li"
+                                     :to="{name:'mine',params:{product_id:item.product_id,spec_id:0 }}">
+                            <div><img :src="item.small_image |addUrl " /></div>
+                        </router-link>
                     </Slide>
                 </Swiper>
             </div>
         </div>
         <!----------- show----------->
         <div class="show_img">
-            <a class="show_img_left"><img :src="showImgLeft | addUrl"></a>
+            <router-link tag="li"
+                         :to="{name:'mine',params:{product_id:showImgLeft.product_id,spec_id:showImgLeft.block_products.spec_id}}">
+                <a class="show_img_left"><img :src="showImgLeft.small_image | addUrl"></a>
+            </router-link>
+
             <div class="show_img_right">
-                <a><img :src="showImgRT | addUrl"></a>
-                <a><img :src="showImgRB | addUrl"></a>
+                <router-link tag="li"
+                             :to="{name:'mine',params:{product_id:showImgRT.product_id,spec_id:showImgRT.block_products.spec_id}}">
+                    <a><img :src="showImgRT.small_image | addUrl"></a>
+                </router-link>
+                <router-link tag="li"
+                             :to="{name:'mine',params:{product_id:showImgRB.product_id,spec_id:showImgRB.block_products.spec_id}}">
+                    <a><img :src="showImgRB.small_image | addUrl"></a>
+                </router-link>
             </div>
         </div>
         <!----------- 111 ----------->
         <div class="rxjx">
             <h2>热销机型</h2>
+            <router-link tag="li"
+                             :to="{name:'mine',params:{product_id:rxjxImg.product_id,spec_id:rxjxImg.block_products.spec_id}}">
             <a>
-                <img :src="rxjxImg | addUrl">
+                <img :src="rxjxImg.small_image | addUrl">
             </a>
+            </router-link>
         </div>
         <!----------- 111 ----------->
         <div class="showAll">
             <div class="show_list"
                  v-for="(item,index) in hotSaleData"
                  :key="index">
-                <a><img :src="item.small_image | addUrl"></a>
-                <div class="info">
-                    <h4>{{item.title}}</h4>
-                    <h5 v-html="item.sub_title"></h5>
-                    <p>
-                        <em>￥</em>
-                        <span class="nowPrice">{{item.block_products.original_price}}</span>
-                        <span class="oldPrice">{{item.block_products.price==item.block_products.original_price ?"":item.block_products.price}}</span>
-                    </p>
-                </div>
+                <router-link tag="li"
+                             :to="{name:'mine',params:{product_id:item.product_id,spec_id:item.block_products.spec_id}}">
+                    <a><img :src="item.small_image | addUrl"></a>
+                    <div class="info">
+                        <h4>{{item.title}}</h4>
+                        <h5 v-html="item.sub_title"></h5>
+                        <p>
+                            <em>￥</em>
+                            <span class="nowPrice">{{item.block_products.original_price}}</span>
+                            <span class="oldPrice">{{item.block_products.price==item.block_products.original_price ?"":item.block_products.price}}</span>
+                        </p>
+                    </div>
+                </router-link>
             </div>
 
         </div>
@@ -71,20 +95,26 @@
         <div class="siftParts">
             精选配件
         </div>
-        <a class="siftParts_banner">
-            <img :src="jxpjImg | addUrl">
-        </a>
+        <router-link tag="li"
+                     :to="{name:'mine',params:{product_id:jxpjImg.product_id,spec_id:jxpjImg.block_products.spec_id}}"
+  class="siftParts_banner">
+                <img :src="jxpjImg.small_image | addUrl">
+
+        </router-link>
         <!--copyList-->
         <div class="siftParts_list">
             <div class="sp_showParts"
                  v-for="(item,index) in accessoriesData"
                  :key="index">
-                <a class="sp_showImg">
-                    <img :src="item.small_image | addUrl"></a>
-                <h3>{{item.title}}</h3>
-                <p>
-                    ￥<span>{{item.block_products.price}}</span>
-                </p>
+                <router-link tag="li"
+                             :to="{name:'mine',params:{product_id:item.product_id,spec_id:item.block_products.spec_id}}">
+                    <a class="sp_showImg">
+                        <img :src="item.small_image | addUrl"></a>
+                    <h3>{{item.title}}</h3>
+                    <p>
+                        ￥<span>{{item.block_products.price}}</span>
+                    </p>
+                </router-link>
             </div>
         </div>
         <div class="findMorePhone">
@@ -141,22 +171,23 @@ export default {
             carouselData: [],
             hotSaleData: [],
             accessoriesData: [],
-            showImgLeft: "",
-            showImgRT: "",
-            showImgRB: "",
-            rxjxImg: "",
-            jxpjImg: "",
-            navBarFixed:false
+            showImgLeft: {},
+            showImgRT: {},
+            showImgRB: {},
+            rxjxImg: {},
+            jxpjImg: {},
+            navBarFixed: false,
+            adFlag: true
         };
     },
     async created() {
         let data = await homeApi();
         console.log(data.data);
-        this.showImgLeft = data.data[502][0].small_image;
-        this.showImgRT = data.data[503][0].small_image;
-        this.showImgRB = data.data[504][0].small_image;
-        this.rxjxImg = data.data[507][0].small_image;
-        this.jxpjImg = data.data[508][0].small_image;
+        this.showImgLeft = data.data[502][0];
+        this.showImgRT = data.data[503][0];
+        this.showImgRB = data.data[504][0];
+        this.rxjxImg = data.data[507][0];
+        this.jxpjImg = data.data[508][0];
         this.hotSaleData = data.data[506];
         this.carouselData = data.data[501];
         this.accessoriesData = data.data[505];
@@ -166,19 +197,22 @@ export default {
         Swiper,
         Slide
     },
-    mounted(){
-        window.addEventListener('scroll', this.watchScroll)
+    mounted() {
+        window.addEventListener("scroll", this.watchScroll);
     },
-    methods:{
-         watchScroll () {
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-        //  当滚动超过 50 时，实现吸顶效果
-        if (scrollTop > 54) {
-          this.navBarFixed = true
-        } else {
-          this.navBarFixed = false
+    methods: {
+        closeAd() {
+            this.adFlag = false;
+            this.navBarFixed = true;
+        },
+        watchScroll() {
+            var scrollTop = window.pageYOffset;
+            if (scrollTop > 54 || this.adFlag == false) {
+                this.navBarFixed = true;
+            } else {
+                this.navBarFixed = false;
+            }
         }
-     }
     }
 };
 </script>
@@ -211,7 +245,7 @@ img {
 }
 
 .carousel {
-    width:100%;
+    width: 100%;
     height: 2.6rem;
 }
 .search {
@@ -225,7 +259,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index:99;
+    z-index: 99;
 }
 .logo {
     width: 0.98rem;
@@ -240,7 +274,7 @@ img {
     height: 0.35rem;
     padding-left: 0.4rem;
     color: rgb(115, 115, 115);
-    background: rgb(248,248,248) 
+    background: rgb(248, 248, 248)
         url(https://oss.static.nubia.cn/active/5c73876ac212759.png) no-repeat
         12px center;
     background-size: 20px;
@@ -262,11 +296,11 @@ img {
     height: 0.24rem;
 }
 .navBarWrap {
-    position:fixed;
-    top:0;
-    background:#fff;
-    z-index:999;
-  }
+    position: fixed;
+    top: 0;
+    background: #fff;
+    z-index: 999;
+}
 .show_img {
     border-bottom: 0.1rem solid #eeeeee;
     overflow: hidden;
@@ -332,8 +366,8 @@ img {
     font-size: 0.13rem;
     color: #8e8d8e;
 }
-.info h5 span{
-    color:#8e8d8d !important;
+.info h5 span {
+    color: #8e8d8d !important;
 }
 .info em {
     font-size: 0.12rem;
@@ -352,7 +386,7 @@ img {
     /* text-decoration: line-through; */
     font-size: 0.16rem;
     font-weight: 300;
-    color:rgb(112, 112, 112);;
+    color: rgb(112, 112, 112);
 }
 .show_list p {
     height: 0.2rem;

@@ -5,7 +5,7 @@ import cate from './cate';
 import discover from './discover';
 import cart from './cart';
 import mine from './mine';
-import search from "./search"
+import search from "./searchPage";
 Vue.use(VueRouter);
 
 const router = new VueRouter({
