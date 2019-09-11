@@ -1,44 +1,49 @@
 <template>
-  <div id="list">
-    <div class="list" v-for="(item) in Infos">
-      <p>
-        <i></i>
-        <span>{{item.cate_name}}</span>
-        <i></i>
-      </p>
-      <ul>
-        <li v-for="(items) in item.infos ">
-          <a href="#">
-            <img :src="items.image_id | getImg()" alt />
-            <p>{{items.product_name}}&nbsp;{{items.color_name}}</p>
-          </a>
-        </li>
-      </ul>
-      <p class="check_more">
-        <a href="#">查看更多红魔</a>
-      </p>
+  <div id="list" ref="active">
+    <div class="type">
+      <div class="list" v-for="(item,index) in Infos" :key="index">
+        <p>
+          <i></i>
+          <span>{{item.cate_name}}</span>
+          <i></i>
+        </p>
+        <ul>
+          <li v-for="(items,index) in item.infos" :key="index">
+            <a href="#">
+              <img :src="items.image_id | getImg()" alt />
+              <p>{{items.product_name}}&nbsp;{{items.color_name}}</p>
+            </a>
+          </li>
+        </ul>
+        <router-link tag="p" class="check_more" :to="{name:'more',params:{num:1,id:item.cate_id}}">
+          <a href="#">查看更多{{item.cate_name}}></a>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import { getTypeList } from "@api";
-import filter from "@common";
+
 
 export default {
   name: "cateRight",
   async created() {
     let data = await getTypeList();
     this.Infos = data.data.result;
-    this.$observer.$on("handlerClick",value=>{
-        console.log(value)
-    })
+    this.$observer.$on("handlerClick", value => {
+      this.$nextTick(() => {
+        let listDiv = this.$refs.active.querySelectorAll(".list")[value];
+        this.$refs.active.scrollTop = listDiv.offsetTop - 70;
+      });
+    });
   },
   data() {
     return {
       Infos: []
     };
   },
-   filters: {
+  filters: {
     getImg(value) {
       return "//oss.static.nubia.cn/" + value;
     }
@@ -49,11 +54,13 @@ export default {
 #list {
   float: right;
   width: 70%;
-  right: 0px;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  height: 100%;
+  overflow: auto;
 }
-
+.type {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
 #list .list > p {
   color: #191919;
   line-height: 50px;
@@ -80,6 +87,7 @@ export default {
   display: flex;
   padding: 0 17px;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 #list .list ul li {
@@ -94,7 +102,7 @@ export default {
 #list .list ul li a p {
   color: #666666;
   text-align: center;
-  margin: 12px 0 0;
+  margin: 10px 0 0;
   font-size: 0.1rem;
   width: 105px;
 }

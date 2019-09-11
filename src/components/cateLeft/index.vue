@@ -6,6 +6,7 @@
           v-for="(item,index) in list"
           :class="Colorindex==index?'active':''"
           @click="clickHandler(index)"
+          :key="index"
         >
           <a href="#">{{item.cate_name}}</a>
         </li>
@@ -25,7 +26,7 @@ export default {
   data() {
     return {
       list: "",
-      Colorindex: -1
+      Colorindex: 0
     };
   },
   methods: {

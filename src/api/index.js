@@ -8,3 +8,15 @@ export const getTypeList = () => http({
         
     }
 });
+
+//查看更多
+export const getMoreList = (num=1,Id)=>http({
+    method:"GET",
+    url:"/app/show/page/searchPhone",
+    data:{
+        pageNum:num,
+        pageSize:10,
+        cateId:Id,
+        type:0,
+    }
+})

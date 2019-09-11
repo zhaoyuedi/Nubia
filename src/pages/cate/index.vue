@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="wrap">
     <div class="search">
       <div class="find">红魔3S</div>
-      <a href="#">
+      <router-link :to="{name:'memberMessage'}">
         <img src="//shop-soa-static.nubia.com/images/buy_mobile/message.png" alt />
-      </a>
+      </router-link>
     </div>
     <cateLeft />
     <cateRight />
@@ -18,11 +18,14 @@ export default {
   name: "Cate",
   components: {
     [CateLeft.name]: CateLeft,
-    [CateRight.name] : CateRight,
+    [CateRight.name]: CateRight
   }
 };
 </script>
 <style scoped>
+.wrap {
+  height: 100%;
+}
 .search {
   display: flex;
   align-items: center;
