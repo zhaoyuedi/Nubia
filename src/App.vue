@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <Nubia-tabBar/>
+    <Nubia-tabBar v-if="$route.meta.flag"/>
   </div>
 </template>
 

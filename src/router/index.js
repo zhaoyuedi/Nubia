@@ -14,7 +14,7 @@ const router = new VueRouter({
     routes:[
         {
             path:'/',
-            redirect:"/cate"
+            redirect:"/home"
         },
         home,
         cate,

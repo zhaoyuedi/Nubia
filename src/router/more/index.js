@@ -1,9 +1,9 @@
 export default {
-  path: "/more",
+  path: "/more/:id/:title",
   name: "more",
-  meta:{
-    flag:false
+  meta: {
+    flag: false
   },
-  props:true,
+  props: true,
   component: () => import("@pages/more")
 };

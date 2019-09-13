@@ -8,14 +8,22 @@
           <i></i>
         </p>
         <ul>
-          <li v-for="(items,index) in item.infos" :key="index">
+          <li
+            v-for="(items,index) in item.infos"
+            :key="index"
+            :to="{name:'product',params:{product_id:items.product_id,spec_id:items.spec_id}}"
+          >
             <a href="#">
               <img :src="items.image_id | getImg()" alt />
               <p>{{items.product_name}}&nbsp;{{items.color_name}}</p>
             </a>
           </li>
         </ul>
-        <router-link tag="p" class="check_more" :to="{name:'more',params:{num:1,id:item.cate_id}}">
+        <router-link
+          tag="p"
+          class="check_more"
+          :to="{name:'more',params:{id:item.cate_id,title:item.cate_name}}"
+        >
           <a href="#">查看更多{{item.cate_name}}></a>
         </router-link>
       </div>
@@ -24,7 +32,6 @@
 </template>
 <script>
 import { getTypeList } from "@api";
-
 
 export default {
   name: "cateRight",
@@ -37,6 +44,9 @@ export default {
         this.$refs.active.scrollTop = listDiv.offsetTop - 70;
       });
     });
+    let title = this.Infos.map(item => {
+      return { title: item.cate_name, id: item.cate_id };
+    });
   },
   data() {
     return {
@@ -47,7 +57,8 @@ export default {
     getImg(value) {
       return "//oss.static.nubia.cn/" + value;
     }
-  }
+  },
+  methods: {}
 };
 </script>
 <style scoped>

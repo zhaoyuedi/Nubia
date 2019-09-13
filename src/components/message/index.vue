@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="message">
-      <a href="#">
+      <v-touch tag="a" @tap="goback()" href="#">
         <span class="return"></span>
         <span class="tz">消息通知</span>
-      </a>
+      </v-touch>
     </div>
     <ul class="nav">
       <li>活动</li>
@@ -23,7 +23,12 @@
 </template>
 <script>
 export default {
-    name:"message"
+    name:"message",
+    methods: {
+      goback(){
+        this.$router.back()
+      }
+    },
 };
 </script>
 <style scoped>
