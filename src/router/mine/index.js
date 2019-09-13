@@ -1,5 +1,34 @@
 export default {
     path:"/mine/product_id=:product_id/spec_id=:spec_id",
     name:"mine",
-    component:()=>import("@pages/mine")
+    meta:{
+        flag:true
+    },
+    component:()=>import("@pages/mine"),
+    children:[
+        {
+            path:"order",
+            name:"order",
+            meta:{
+                flag:false
+            },
+            component:()=>import("@components/orderAll")
+        },
+        {
+            path:"login",
+            name:"login",
+            meta:{
+                flag:false
+            },
+            component:()=>import("@components/login"),
+            children:[{
+                path:"regist",
+                name:"regist",
+                meta:{
+                    flag:false
+                },
+                component:()=>import("@components/regist")
+            }]
+        },
+    ]
 }

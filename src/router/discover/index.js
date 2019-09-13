@@ -1,4 +1,5 @@
 export default {
+<<<<<<< HEAD
     path: "/discover",
     name: "discover",
     component: () => import("@pages/discover"),
@@ -29,4 +30,12 @@ export default {
         },
 
     ]
+=======
+    path:"/discover",
+    name:"discover",
+    meta:{
+        flag:false
+    },
+    component:()=>import("@pages/discover")
+>>>>>>> c62495f6bddf5dd148cbb864e093733cd05a5c60
 }

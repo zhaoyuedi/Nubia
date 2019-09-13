@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <Nubia-tabBar/>
+    <Nubia-tabBar v-if="$route.meta.flag"/>
   </div>
 </template>
 
@@ -14,8 +14,15 @@ export default {
   }
 };
 </script>
+<<<<<<< HEAD
 <style>
 #app{
   height: 100%;
 }
+=======
+<style scoped>
+  #app{
+    height: 100%;
+  }
+>>>>>>> c62495f6bddf5dd148cbb864e093733cd05a5c60
 </style>
