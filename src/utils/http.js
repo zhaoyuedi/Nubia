@@ -26,8 +26,5 @@ http.interceptors.response.use(res=>{
     }
 })
 
-<<<<<<< HEAD
 export default http;
-=======
-export default http
->>>>>>> c62495f6bddf5dd148cbb864e093733cd05a5c60
+

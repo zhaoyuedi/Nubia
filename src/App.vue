@@ -14,15 +14,8 @@ export default {
   }
 };
 </script>
-<<<<<<< HEAD
-<style>
-#app{
-  height: 100%;
-}
-=======
 <style scoped>
   #app{
     height: 100%;
   }
->>>>>>> c62495f6bddf5dd148cbb864e093733cd05a5c60
 </style>

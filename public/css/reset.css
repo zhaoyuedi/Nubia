@@ -18,10 +18,7 @@ a { color:#666; text-decoration:none; }
 *{box-sizing:border-box}
 body,html{
     height: 100%;
-<<<<<<< HEAD
     /* overflow: hidden; */
-=======
->>>>>>> c62495f6bddf5dd148cbb864e093733cd05a5c60
 }
 html{
     font-size: 26.67vw

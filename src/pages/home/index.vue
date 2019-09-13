@@ -42,7 +42,7 @@
         <!----------- show----------->
         <div class="show_img">
             <router-link tag="li"
-                         :to="{name:'mine',params:{product_id:showImgLeft.product_id,spec_id:showImgLeft.block_products.spec_id}}">
+                         :to="{name:'product',params:{product_id:showImgLeft.product_id,spec_id:showImgLeft.block_products.spec_id}}">
                 <a class="show_img_left"><img :src="showImgLeft.small_image | addUrl"></a>
             </router-link>
 
@@ -80,8 +80,8 @@
                         <h5 v-html="item.sub_title"></h5>
                         <p>
                             <em>￥</em>
-                            <span class="nowPrice">{{item.block_products.original_price}}</span>
-                            <span class="oldPrice">{{item.block_products.price==item.block_products.original_price ?"":item.block_products.price}}</span>
+                            <span class="nowPrice">{{item.block_products.price}}</span>
+                            <span class="oldPrice">{{item.block_products.price==item.block_products.original_price ?"":item.block_products.original_price}}</span>
                         </p>
                     </div>
                 </router-link>
@@ -383,7 +383,7 @@ img {
     margin-right: 0.1rem;
 }
 .oldPrice {
-    /* text-decoration: line-through; */
+    text-decoration: line-through;
     font-size: 0.16rem;
     font-weight: 300;
     color: rgb(112, 112, 112);
