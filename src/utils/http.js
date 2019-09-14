@@ -1,4 +1,5 @@
 import axios from "axios";
+import loading from "@lib/loading/index.js"
 
 const http = axios.create({
     timeout:1000,
@@ -10,9 +11,8 @@ http.interceptors.request.use(config=>{
     if(config.method == "get"){
         config.params = {...config.data};
     }else if(config.method == "post"){
-        
     }
-
+    loading.open();
     return config;
 },err=>{
     return Promise.reject(err);
@@ -21,14 +21,9 @@ http.interceptors.request.use(config=>{
 
 http.interceptors.response.use(res=>{
     if(res.status == 200){
+        loading.close();
         return res.data;
     }
 })
 
-export default (method,url,data)=>{
-    return http({
-        method,
-        url,
-        data
-    })
-}
+export default http;

@@ -1,64 +1,76 @@
 <template>
-    <div>
-      <div class="tabBar">
-          <li>
-              <i class="iconfont icon-tubiao-"></i>
-              <span>首页</span>
-          </li>
-          <li>
-              <i class="iconfont icon-fenlei"></i>
-              <span>分类</span>
-          </li>
-          <li>
-              <i class="iconfont icon-faxian"></i>
-              <span>发现</span>
-          </li>
-          <li>
-              <i class="iconfont icon-gouwuche"></i>
-              <span>购物车</span>
-          </li>
-          <li>
-              <i class="iconfont icon-wode"></i>
-              <span>我</span>
-          </li>
-          
-      </div>
+  <div>
+    <!-- tabBar -->
+    <div class="tabBar">
+      <router-link :to="item.path" v-for="(item,index) in tabBars" :key="index" tag="li">
+        <i class="iconfont" v-html="item.icon"></i>
+        <span>{{item.title}}</span>
+      </router-link>
     </div>
+  </div>
 </template>
 <script>
 export default {
-    name:"Nubia-tabBar"
-}
+  name: "Nubia-tabBar",
+  data() {
+    return {
+      tabBars: [
+        {
+          icon: "&#xe64f;",
+          title: "首页",
+          path: "/home"
+        },
+        {
+          icon: "&#xe653;",
+          title: "分类",
+          path: "/cate"
+        },
+        {
+          icon: "&#xe746;",
+          title: "发现",
+          path: "/discover"
+        },
+        {
+          icon: "&#xe622;",
+          title: "购物车",
+          path: "/cart"
+        },
+        {
+          icon: "&#xe654;",
+          title: "我",
+          path: "/mine"
+        }
+      ]
+    };
+  }
+};
 </script>
-<style  scoped>
-html,body{
-    font-size: 26.67vw
+
+
+<style scoped lang="scss">
+.tabBar {
+  width: 100%;
+  height: 0.5rem;
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  justify-content: space-around;
+  background: #fff;
+  border-top: 1px solid #ccc;
 }
-.tabBar{
-    width: 100%;
-    height: 0.56rem;
-    position: fixed;
-    display: flex;
-    bottom: 0;
-    justify-content: space-around;
-    background:#fff; 
-    border-top:1px solid #ccc;
+.tabBar li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
 }
-.tabBar li{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
+.tabBar li span {
+  line-height: 0.2rem;
+  font-size: 0.12rem;
+  
 }
-.tabBar li span{
-    line-height: 0.2rem;
-    font-size: 0.12rem;
-    color: #ccc;
+.tabBar .router-link-active{
+    color:#ff6060
 }
-.tabBar li i{
-    font-size: 0.2rem !important;
-}
-.tabBar li:nth-child(5) i{color:#ff5000;}
-.tabBar li:nth-child(5) span{color:#ff5000;}
 </style>
