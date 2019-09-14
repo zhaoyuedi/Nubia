@@ -2,7 +2,8 @@ export default {
     path:"/mine",
     name:"mine",
     meta:{
-        flag:true
+        flag:true,
+        Auth:false
     },
     component:()=>import("@pages/mine"),
     children:[
@@ -10,7 +11,8 @@ export default {
             path:"order",
             name:"order",
             meta:{
-                flag:false
+                flag:false,
+                Auth:true
             },
             component:()=>import("@components/orderAll")
         },
@@ -18,14 +20,16 @@ export default {
             path:"login",
             name:"login",
             meta:{
-                flag:false
+                flag:false,
+                Auth:false
             },
             component:()=>import("@components/login"),
             children:[{
                 path:"regist",
                 name:"regist",
                 meta:{
-                    flag:false
+                    flag:false,
+                    Auth:false
                 },
                 component:()=>import("@components/regist")
             }]

@@ -2,7 +2,8 @@ export default {
     path:"/cate",
     name:"cate",
     meta:{
-        flag:true
+        flag:true,
+        Auth:false
     },
     component:()=>import("@pages/cate")
 }

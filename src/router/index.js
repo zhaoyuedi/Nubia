@@ -22,4 +22,42 @@ const router = new VueRouter({
     ]
 })
 
+// router.beforeEach((to, from, next) => {
+//     if (to.path === '/mine/login') {
+//       next();
+//     } else {
+//       let token = localStorage.getItem('quanxian');
+   
+//       if (token === 'null' || token === '') {
+//         next('/mine/login');
+//       } else {
+//         next();
+//       }
+//     }
+  
+// });
+
+
+
+
+// //针对全局的
+router.beforeEach((to,from,next)=>{
+  // document.title = to.meta.title;
+  if(to.path!="/mine/login" && to.meta.Auth){
+  //校验 校验用户是否登录
+      if( localStorage.getItem('quanxian')){
+            next();
+       }else{
+            next("/mine/login?path="+to.path)
+          }
+  
+  }else{
+  //不需要校验，可以直接进入相对应得页面
+        next();
+  }
+  
+  
+  })
+  
+
 export default router

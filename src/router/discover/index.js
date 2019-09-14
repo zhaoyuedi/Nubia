@@ -2,7 +2,8 @@ export default {
     path:"/discover",
     name:"discover",
     meta:{
-        flag:false
+        flag:false,
+        Auth:false
     },
     component:()=>import("@pages/discover")
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="BigBox">
     <router-view></router-view>
     <section class="bgColor">
       <!-- 头部 -->
@@ -13,10 +13,20 @@
           <div class="headImg">
             <div class="headImgBox"></div>
             <div class="headInfoBox">
-              <router-link 
+              <router-link
+                ref="zhi"
                 to="/mine/login"
                 tag="div"
-              class="headInfoTop">登录/注册</router-link>
+                v-if="!isLogin"
+                class="headInfoTop"
+              >登录/注册</router-link>
+
+              <div v-else class="headInfoTop">
+                {{$route.query.userId}}
+              
+                <span @click="quit">退出</span>
+              </div>
+
               <div class="headInfoBottom">普通会员</div>
             </div>
           </div>
@@ -145,10 +155,50 @@
 </template>
 <script>
 export default {
-  name: "Mine"
+  name: "Mine",
+  created() {
+    let info = this.$route.query.userId;
+    // console.log(info)
+    if (info) {
+      this.isLogin = true;
+      localStorage.setItem("quanxian", JSON.stringify(this.userInfo));
+    }
+    // this.userInfo = info
+  },
+  data() {
+    return {
+      userInfo: "1111",
+      isLogin: false
+    };
+  },
+  watch: {
+    $route(to, from) {
+      let info = to.query.userId;
+      if (info == undefined) {
+        this.isLogin = false;
+      } else if (info) {
+        this.isLogin = true;
+        localStorage.setItem("quanxian", JSON.stringify(this.userInfo));
+      }
+    }
+  },
+  methods: {
+    isLogina() {
+      this.isLogin = true;
+    },
+    quit() {
+      this.$router.push("/mine");
+      this.isLogin = false;
+      localStorage.removeItem("quanxian");
+    }
+  }
 };
 </script>
 <style>
+.BigBox {
+  overflow: hidden;
+  height: 6.67rem;
+}
 .bgColor {
   background: #f5f5f5;
   padding-bottom: 0.56rem;
@@ -192,7 +242,7 @@ export default {
 }
 
 .headInfoTop {
-  width: 0.72rem;
+  width: 2rem;
   height: 0.2rem;
   font-size: 0.16rem;
   line-height: 0.26rem;

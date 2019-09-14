@@ -1,7 +1,8 @@
 <template>
   <div class="bg">
-    <router-view></router-view>
+   
     <section class="bgCCC">
+       <router-view></router-view>
       <div class="layout">
         <div class="loginLogo">
           <img src="../../../public/img/m_logo.png" alt />
@@ -10,15 +11,15 @@
           <form action>
             <div class="inputBox">
               <em class="idIcon"></em>
-              <input type="text" class="idtxt" />
+              <input type="text" class="idtxt" v-model="username" />
             </div>
             <div class="inputBox">
               <em class="pwdIcon"></em>
-              <input type="password" class="pwdtxt" />
+              <input type="password" class="pwdtxt" v-model="password" />
               <i class="eye"></i>
             </div>
             <span class="phoneDl">手机验证码登录</span>
-            <div class="btn-reg">立即登录</div>
+            <div class="btn-reg" @click="login()">立即登录</div>
           </form>
         </div>
         <div class="otherLogin">
@@ -43,12 +44,53 @@
 </template>
 <script>
 export default {
-  naem: "login"
+  naem: "login",
+
+  data() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
+  methods: {
+    login() {
+      if (localStorage.getItem("userList") !== null) {
+        let userinfo = JSON.parse(localStorage.getItem("userList"));
+        // console.log(userinfo)
+        if (this.username !== "" && this.password !== "") {
+          // console.log(userinfo);
+          for (var i = 0; i < userinfo.length; i++) {
+            if (this.username == userinfo[i].username) {
+              if (this.password == userinfo[i].password) {
+                this.$router.push({
+                  path: "/mine",
+                  name:"mine",
+                  query: { userId: this.username }
+                });
+                
+                // console.log(userinfo[i].username);
+                break;
+              } else {
+                alert("密码错误");
+                break;
+              }
+            } else if (this.username != userinfo[i].username) {
+              alert("用户名不存在");
+              break;
+            }
+          }
+        } else {
+          alert("请正确输入");
+        }
+      }
+    }
+  }
 };
 </script>
 <style scoped>
 .bg {
   overflow: hidden;
+  height: 6.67rem;
 }
 .bgCCC {
   background: #f5f5f5;

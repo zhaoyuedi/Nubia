@@ -5,19 +5,24 @@
         <form action>
           <p>用手机号注册</p>
           <div class="inputBox">
-            <input type="text" class="idtxt" placeholder="请输入侬的手机号" />
+            <input type="text" class="idtxt" placeholder="请输入您的用户名" v-model="username" />
           </div>
           <div class="inputBox">
-            <input type="password" class="pwdtxt" placeholder="6-16个字符(数字、字母、符号至少包含两种)" />
+            <input
+              type="password"
+              class="pwdtxt"
+              placeholder="6-16个字符(数字、字母、符号)"
+              v-model="password"
+            />
             <i class="eye"></i>
           </div>
         </form>
       </div>
       <div class="ImgBox">
         <div class="txt">
-          <input type="text" class="imgtxt" placeholder="请输图片入验证码" />
+          <input type="text" class="imgtxt" placeholder="请输图片入验证码" v-model="confirm" />
         </div>
-        <div class="imgKuang">7745</div>
+        <div class="imgKuang" ref="yanzheng">7745</div>
       </div>
 
       <div class="ImgBox">
@@ -31,14 +36,44 @@
         <span>用户协议</span>和
         <span>隐私协议</span>
       </p>
-      <div class="btnBox1">立即注册</div>
+      <div class="btnBox1" @click="register()">立即注册</div>
     </section>
   </div>
 </template>
 <script>
 export default {
-  name: "regist"
-};
+  name: "regist",
+
+  data() {
+    return {
+      username: "",
+      password: "",
+      confirm: "",
+      userList: []
+    };
+  },
+  
+  methods: {
+    register() {
+      // let reg = new RegExp("^[a-zA-Z]w{5,17}$");
+      //   this.userList = JSON.parse(localStorage.getItem("userList"));
+      // console.log(this.le)
+      if (!this.username || this.confirm != 7745 || !this.password) {
+        alert("请正确输入");
+      } else {
+ 
+          var obj = {};
+          obj.username = this.username;
+          obj.password = this.password;
+          // 
+          
+        }
+        this.userList.push(obj);
+        localStorage.setItem("userList", JSON.stringify(this.userList));
+      }
+    }
+  }
+
 </script>
 <style scoped>
 .bg {

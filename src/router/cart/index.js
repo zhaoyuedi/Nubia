@@ -2,7 +2,8 @@ export default {
     path:"/cart",
     name:"cart",
     meta:{
-        flag:true
+        flag:false,
+        Auth:false
     },
     component:()=>import("@pages/cart")
 }
